@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="./css/misestilos.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/journal/bootstrap.min.css" rel="stylesheet" integrity="sha384-/qQob+A1P2FeRYphuSbqp7heEKdhjZxqgAz/yWLX9CQKU9FTB8wKTexI0IiFlIXC" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         
 
      
@@ -49,6 +52,15 @@
 
 <div id = "listado">
 <?php include "listadouBooks.php"?>
+</div>
+
+
+<div class="modal-dialog" role="document" id="borrarDialog" title="Eliminar libro">
+  <p>¿Desea realmente borrar este libro?</p>
+</div>
+
+<div id="editDialog" title="Editar libro">
+<?php include "editarLibro.php"?>
 </div>
 
 </body>

@@ -15,7 +15,7 @@ if(empty($_POST["q"]) || ($categorias = "all")){
 
 if ($_POST["q"]){
 
-        $consulta = "SELECT l.idLibro,l.titulo,l.anoLanz,l.paginas,l.editoras_idEditora,e.nomEditora
+        $consulta = "SELECT l.idLibro,l.titulo,l.anoLanz,l.paginas,l.encuadernacion,l.unidades,l.editoras_idEditora,e.nomEditora
         FROM libros l, editoras e
         WHERE l.editoras_idEditora = e.idEditora AND l.titulo LIKE '%" . $_POST["q"] . "%'";
     
@@ -60,7 +60,9 @@ if (isset($categorias) && ($categorias != "all")) {
         <td><?=$fila->encuadernacion?></td>
         <td><?=$fila->unidades?></td>
         <td><?=$fila->nomEditora?></td>
-        <td><?=$fila->nomEditora?></td>
+        <td><button class ="modificar btn btn-outline-primary btn-sm"><span class="badge badge-danger">Modificar</span></button>
+            <button class ="borrar btn btn-outline-primary btn-sm"><span class="badge badge-primary">Borrar</span></button>
+        </td>
     </tr>
    
 

@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	var idCategoria;
 	var nomCategoria;
+	var idLibro;
 
 
 	// Función encargada del autocompletado.
@@ -44,6 +45,7 @@ $(document).ready(function(){
 
 	});
 
+	// Botón de cancelar nuevo registro
 	$(document).on("click","#cancNuevo",function(){
 
 		$("#formNuevo").hide();
@@ -51,6 +53,7 @@ $(document).ready(function(){
 
 	});
 
+	// Botón aceptar nuevo registro y hace la introducción de los datos en la tabla libros
 	$(document).on("click","#acepNuevo",function(){
 		
 		$.post("nuevo_registro_insertar.php", {
@@ -68,5 +71,71 @@ $(document).ready(function(){
 				})//post
 		
 	});
+
+
+
+	// Borrado del registro en el listado html
+	$(document).on("click",".borrar",function(){
+
+		idLibro = $(this).parents("tr").data("idlibro");
+		$("#borrarDialog").dialog("open");
+
+	});
+
+
+	//Dialogo para el borrado
+	$("#borrarDialog").dialog({
+		autoOpen:false,
+		resizable:false,
+		height:"auto",
+		width:400,
+		modal:true,
+
+		buttons: {
+			"Borrar": function() {
+				$.get("borrarLibro.php", {"idlibro":idLibro},function(data,status){				
+					$("#idLibro_" + idLibro).fadeOut(500);
+				})
+				$(this).dialog( "close" );
+			},
+			"Cancelar": function() {
+			  $(this).dialog( "close" );
+			}
+		  }
+	});	
+
+	$( "#editDialog" ).dialog({
+		autoOpen: false,
+		resizable: false,
+		modal: true,
+		buttons: {
+		"Guardar": function() {			
+			$.post("inmueble_modificar.php", {
+				idinmueblemodificar : idinmueble,
+				direccionmodificar : $("#direccionmodificar").val() ,
+				idtipomodificar: $("#idtipomodificar").val() ,
+				idtipo: $("#idtipo").val() ,
+				visitamodificar : $("#visitamodificar").val()
+			},function(data,status){				
+				$("#contenedor").html(data);
+			})//get			
+					
+			$(this).dialog( "close" );												
+					},
+		"Cancelar": function() {
+				$(this).dialog( "close" );
+		}
+		}//buttons
+	});	
+
+	// Modificado de un libro, rellenando los campos
+	$(document).on("click",".modificar",function(){
+
+		idlibro = $(this).parents("tr").data("idlibro");
+
+
+
+	});
+
 });
 	   
