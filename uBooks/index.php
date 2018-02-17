@@ -60,8 +60,10 @@
 </div>
 
 <div id="editDialog" title="Editar libro">
-<?php include "editarLibro.php"?>
+<?php include "editarLibro_modificar.php"?>
 </div>
-
+<p class="text-center mt-2">
+			<a id="paginacion" href="">Mostrar más</a>
+		</p>
 </body>
 </html>

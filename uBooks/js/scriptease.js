@@ -2,13 +2,17 @@ $(document).ready(function(){
 	var idCategoria;
 	var nomCategoria;
 	var idLibro;
+	var pagina = 1;
+	var vez = 1;
+
+	carga();
 
 
 	// Función encargada del autocompletado.
 	$(document).on("keypress keyup","#buscalibros",function(){
 
 		var valor= $("#buscalibros").val();
-		$.post("listadouBooks.php",{q:valor},function(data){
+		$.get("listadouBooks.php",{q:valor},function(data,status){
 			$("#listado").html(data);
 		});
 	});
@@ -62,8 +66,10 @@ $(document).ready(function(){
 					"nuevapagina":$("#nuevaPagina").val(),
 					"nuevaencu":$("#nuevaEnc").val(),
 					"nuevauni":$("#nuevaUni").val(),
-					"idedinueva":$("#idEdinueva").val()
+					"idedinueva":$("#idEdinueva").val(),
+					"idautnuevo":$("#idAutNuevo").val()
 				},function(data){
+					console.log(data);
 					//Pinta de nuevo la tabla
 					$("#listado").html(data);
 					//Vuelve a mostrar el boton de nuevo
@@ -104,21 +110,29 @@ $(document).ready(function(){
 		  }
 	});	
 
+	// Dialogo de modificar
 	$( "#editDialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
 		modal: true,
 		buttons: {
 		"Guardar": function() {			
-			$.post("inmueble_modificar.php", {
-				idinmueblemodificar : idinmueble,
-				direccionmodificar : $("#direccionmodificar").val() ,
-				idtipomodificar: $("#idtipomodificar").val() ,
-				idtipo: $("#idtipo").val() ,
-				visitamodificar : $("#visitamodificar").val()
-			},function(data,status){				
-				$("#contenedor").html(data);
-			})//get			
+			$.post("editarLibro.php", {
+				idlibroEdit : idlibro,
+				tituloEdit : $("#tituloEdit").val() ,
+				anoEdit: $("#anoEdit").val() ,
+				paginasEdit: $("#paginasEdit").val() ,
+				encuEdit: $("#encuEdit").val() ,
+				unidadesEdit : $("#unidadesEdit").val(),
+				idEditoraEdit : $("#idEditoraEdit").val(),
+				textoEdi: $("#idEditoraEdit :selected").text()
+
+			},function(data,status){
+				$("#idLibro_" + idlibro).fadeOut(200);
+				$("#idLibro_" + idlibro).fadeIn(200);
+				$("#idLibro_" + idlibro).html(data);
+				
+			})		
 					
 			$(this).dialog( "close" );												
 					},
@@ -128,12 +142,71 @@ $(document).ready(function(){
 		}//buttons
 	});	
 
-	// Modificado de un libro, rellenando los campos
+	// Botón de modificado de un libro, rellenando los campos.
 	$(document).on("click",".modificar",function(){
 
+		//Coge el idlibro del parent del elemento que se ha hecho click cuyo nombre sea "tr".
 		idlibro = $(this).parents("tr").data("idlibro");
 
+		// Se recoge el valor del titulo del elemento que se ha hecho click.
+		$("#tituloEdit").val($(this).parent().siblings("td.titulo").html());
 
+		var a = $.trim($(this).parent().siblings("td.ano").text());
+		$("#anoEdit").val(a);
+
+		$("#paginasEdit").val($(this).parent().siblings("td.paginas").html());
+
+		$("#encuEdit").val($(this).parent().siblings("td.encuadernacion").html());
+
+		$("#unidadesEdit").val($(this).parent().siblings("td.unidades").html());
+
+		var idEditora = $(this).parent().siblings("td.ideditora").data("ideditora");
+		$("#idEditoraEdit option[value='" + idEditora + "']").attr("selected",true);
+
+		$("#editDialog").dialog("open");
+
+	});
+
+	$(document).on("click",".orden",function(){
+
+		var valor= "titulo";
+		$.get("listadouBooks.php",{title:valor},function(data){
+			if(vez == 1){
+			$("#listado").html(data);
+			}
+			vez++;
+		});
+
+
+
+	});
+
+	function carga(){
+		$.ajax({
+			method: "post",
+			url: "listadouBooks.php",
+			dataType: "json",
+			data: {"pag": pagina}
+		})
+			.done(function(html){
+
+				if (html["filas"] > 0) {
+					$("#listado").append(html["codigo"]);
+					pagina++;
+				} else {
+					$("#listado").append(html("No se han encontrado más registros en la base de datos."));
+				}
+
+			});
+
+	}
+
+
+
+	$(document).on("click","#paginacion",function(){
+
+		carga();
+		return(false);
 
 	});
 
