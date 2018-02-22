@@ -28,7 +28,7 @@ if(empty($autoC) || ($categorias = "all")){
 
 if (isset($autoC)){
 
-        $consulta = "SELECT l.idLibro,l.titulo,l.anoLanz,l.paginas,l.encuadernacion,l.unidades,l.editoras_idEditora,e.nomEditora
+        $consulta= "SELECT l.idLibro,l.titulo,l.anoLanz,l.paginas,l.encuadernacion,l.unidades,l.editoras_idEditora,e.nomEditora
         FROM libros l, editoras e
         WHERE l.editoras_idEditora = e.idEditora AND l.titulo LIKE '%" . $autoC . "%'";
     
@@ -60,14 +60,13 @@ if (isset($_GET["title"]) && !isset($_GET["idCategoria"]))  {
 
 <table id = "tablaLibros" class="table table-hover">
     <thead> 
-        <tr class="table-dark">
-            <th class ="orden">Título </th>
+        <tr class="table-primary">
+            <th>Título </th>
             <th>Año</th>
             <th>Páginas</th>
             <th>Encuadernación</th>
             <th>Unidades</th>
-            <th class ="orden">Editora </th>
-            <th>Acciones </th>
+            <th>Editora </th>
         </tr>
     </thead>
 
@@ -76,16 +75,13 @@ if (isset($_GET["title"]) && !isset($_GET["idCategoria"]))  {
     while ($fila = $resultado->fetch_object()) {?>
 
 
-    <tr id="idLibro_<?=$fila->idLibro?>" data-idLibro="<?=$fila->idLibro?>"class="table-active">
+    <tr id="idLibro_<?=$fila->idLibro?>" data-idLibro="<?=$fila->idLibro?>"class="table-light" >
         <td class = "titulo"><?=$fila->titulo?></td>
         <td class = "ano"><?=$fila->anoLanz?></td>
         <td class = "paginas"><?=$fila->paginas?></td>
         <td class = "encuadernacion"><?=$fila->encuadernacion?></td>
         <td class = "unidades"><?=$fila->unidades?></td>
         <td class = "ideditora" data-ideditora="<?=$fila->editoras_idEditora?>"><?=$fila->nomEditora?></td>
-        <td><button class ="modificar btn btn-outline-primary btn-sm"><span class="badge badge-danger">Modificar</span></button>
-            <button class ="borrar btn btn-outline-primary btn-sm"><span class="badge badge-primary">Borrar</span></button>
-        </td>
     </tr>
    
 

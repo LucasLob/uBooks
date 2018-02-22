@@ -11,7 +11,7 @@ $(document).ready(function(){
 	$(document).on("keypress keyup","#buscalibros",function(){
 
 		var valor= $("#buscalibros").val();
-		$.get("listadouBooks.php",{q:valor},function(data,status){
+		$.get("listadouBooks2.php",{q:valor},function(data,status){
 			$("#listado").html(data);
 		});
 	});
@@ -22,7 +22,7 @@ $(document).ready(function(){
 	$(document).on("change","#idCategoria",function(){
 		idCategoria = $("#idCategoria").val();
 		$.ajax({
-			url: "listadouBooks.php",
+			url: "listadouBooks2.php",
 			data:{idCategoria:idCategoria},
 			type: "get",
 			success:filtratabla,
@@ -169,7 +169,7 @@ $(document).ready(function(){
 	$(document).on("click",".orden",function(){
 
 		var valor= "titulo";
-		$.get("listadouBooks.php",{title:valor},function(data){
+		$.get("listadouBooks2.php",{title:valor},function(data){
 			if(vez == 1){
 			$("#listado").html(data);
 			}
@@ -183,7 +183,7 @@ $(document).ready(function(){
 	function carga(){
 		$.ajax({
 			method: "post",
-			url: "listadouBooks.php",
+			url: "listadouBooks2.php",
 			dataType: "html",
 			data: {"pag": pagina}
 		})

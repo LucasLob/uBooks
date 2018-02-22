@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 15-02-2018 a las 13:57:30
+-- Tiempo de generación: 22-02-2018 a las 16:08:41
 -- Versión del servidor: 5.7.21-0ubuntu0.17.10.1
 -- Versión de PHP: 7.1.11-0ubuntu0.17.10.1
 
@@ -126,7 +126,7 @@ CREATE TABLE `libros` (
 --
 
 INSERT INTO `libros` (`idLibro`, `titulo`, `anoLanz`, `paginas`, `encuadernacion`, `unidades`, `sinopsis`, `autores_idAutor`, `editoras_idEditora`) VALUES
-(1, 'Harry Potter y La Piedra Filosofal', 2010, 265, 'Tapa blanda', 25, NULL, 1, 1),
+(1, 'Harry Potter y La Piedra Filosofal', 2011, 250, 'Tapa dura', 10, NULL, 1, 11),
 (2, 'Bovedas de Acero', 2016, 272, 'Tapa blanda', 25, NULL, 2, 2),
 (3, 'Fundamentos de Bases de Datos', 2014, 976, 'Tapa blanda', 3, NULL, 3, 10),
 (4, 'El Resplandor', 2017, 688, 'Tapa blanda', 7, NULL, 4, 2),
@@ -136,7 +136,7 @@ INSERT INTO `libros` (`idLibro`, `titulo`, `anoLanz`, `paginas`, `encuadernacion
 (8, 'Te dejo es jodete al reves', 2013, 240, 'Tapa blanda', 8, NULL, 8, 5),
 (9, 'Ofrenda a la tormenta', 2016, 560, 'Tapa blanda', 14, NULL, 9, 11),
 (10, 'Atrapados en el hielo', 2003, 320, 'Tapa blanda', 44, NULL, 10, 7),
-(14, 'Yo,Robot', 2009, 328, 'Tapa blanda', 50, NULL, NULL, 5);
+(16, 'Harry Potter y la Camara Secreta', 2010, 288, 'Tapa blanda', 12, NULL, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -164,6 +164,31 @@ INSERT INTO `libros_has_categorias` (`libros_idLibro`, `categorias_idCategoria`)
 (6, 8),
 (4, 9),
 (2, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellidos` varchar(50) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `contrasenia` varchar(100) NOT NULL,
+  `hash` varchar(32) NOT NULL,
+  `admin` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `apellidos`, `correo`, `contrasenia`, `hash`, `admin`) VALUES
+(3, 'rafael', 'gallardo', 'rafaga@gmail.com', '$2y$10$fxe72s.uVOLNJ5MACvMAvOyvCtN4lMGPLYSeLBDYiqD6wKLddNhpe', 'f9a40a4780f5e1306c46f1c8daecee3b', 0),
+(4, 'Isaias', 'Montiel', 'isamon@gmail.com', '$2y$10$PopULBjojyGtxzetj7LOtuU0sCZ1ASyA.7Afjd1ewJA.UOVDOHPom', 'c06d06da9666a219db15cf575aff2824', 0),
+(5, 'Lucas', 'Lobato', 'llobatobot@gmail.com', '$2y$10$z1x/X0.x3nIR8XSY2pnyp.3liiYDUi.oxY6iAFhHsz35zRPtiZASe', '73278a4a86960eeb576a8fd4c9ec6997', 1);
 
 --
 -- Índices para tablas volcadas
@@ -204,6 +229,12 @@ ALTER TABLE `libros_has_categorias`
   ADD KEY `fk_libros_has_categorias_libros1_idx` (`libros_idLibro`);
 
 --
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -226,7 +257,12 @@ ALTER TABLE `editoras`
 -- AUTO_INCREMENT de la tabla `libros`
 --
 ALTER TABLE `libros`
-  MODIFY `idLibro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idLibro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Restricciones para tablas volcadas
 --
