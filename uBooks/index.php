@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 ?>
 <body>
-  <div class="form">
+  <div  id ="formPrinc" class="form">
       
       <ul class="tab-group">
         <li class="tab"><a href="#registro">Regístrate</a></li>

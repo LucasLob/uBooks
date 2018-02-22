@@ -2,13 +2,12 @@
   box-sizing: border-box;
 }
 
-
 html {
   overflow-y: scroll;
 }
 
 body {
-  background: rgba(19, 35, 47, 0.9); /* #c1bdba */
+  background: 	#ec4137;
   font-family: 'Titillium Web', sans-serif;
 }
 
@@ -23,12 +22,10 @@ a:hover {
 }
 
 .form {
-  background: rgba(19, 35, 47, 0.9); 
-  padding: 40px;
-  max-width: 600px;
+  background: 	#ed683c; 
+  padding: 50px;
+  width:60%;
   margin: 40px auto;
-  border-radius: 4px;
-  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 }
 
 .tab-group {
