@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';
 $user = 'root';
-$pass = 'Th3bl4cKD34tH';
+$pass = '';
 $db = 'uBooks';
 
 $conexion = new mysqli($host,$user,$pass);
