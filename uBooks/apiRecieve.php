@@ -1,3 +1,13 @@
+<?php
+session_start();
+// Verifica si el usuario está logueado usando la variable de session logged_in.
+if ($_SESSION['logged_in'] != 1) {
+  $_SESSION['message'] = "Necesitas estar logueado para ver esta página";
+  header("location: error.php");    
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,6 +50,7 @@
 <body>
 
 <div id = "resultados">
+<h2> Busqueda en la parte superior derecha para buscar libro o título usando la API.</h2>
 </div>
 
 
